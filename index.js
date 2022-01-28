@@ -10,22 +10,13 @@
  ** With React
 */
 const root = document.querySelector('#root');
-const ul = React.createElement('ul', null, [
-  React.createElement('li', {
-    key: 'Apple'
-  }, 'Apple'),
-  React.createElement('li', {
-    key: 'Banana'
-  }, 'Banana'),
-  React.createElement('li', {
-    key: 'Orange'
-  }, 'Orange'),
-  React.createElement('li', {
-    key: 'Avocado'
-  }, 'Avocado'),
-  React.createElement('li', {
-    key: 'Grape'
-  }, 'Grape'),
-]);
+const element = (
+  <ul>
+    <li>Apple</li>
+    <li>Banana</li>
+    <li>Avocado</li>
+    <li>Grape</li>
+  </ul>
+);
 
-ReactDOM.render(ul, root);
+ReactDOM.render(element, root);
