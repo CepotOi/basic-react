@@ -10,13 +10,8 @@
  ** With React
 */
 const root = document.querySelector('#root');
-const element = (
-  <ul>
-    <li>Apple</li>
-    <li>Banana</li>
-    <li>Avocado</li>
-    <li>Grape</li>
-  </ul>
-);
+const name = 'Rizki';
+const className = 'my-class';
+const element = <h1 className={className}>Hello {name}</h1>;
 
 ReactDOM.render(element, root);
