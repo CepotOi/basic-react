@@ -10,10 +10,15 @@
  ** With React
  */
 const root = document.querySelector('#root');
-const style = { width: '100%', height: '100%', border: '1px solid black' };
-const element = <img
-    src="https://www.wallpapertip.com/wmimgs/232-2326709_nissan-skyline-r34-hd-wallpapers-desktop-wallpaper.jpg"
-    alt="GTR 34"
-    style={style} />;
+const Hello = (props) => {
+    return <p>Hello <b>{props.name}</b></p>;
+};
+const element = (
+    <>
+        <Hello name="World" />
+        <Hello name="Rizki" />
+        <Hello name="Udin" />
+    </>
+);
 
 ReactDOM.render(element, root);
