@@ -10,15 +10,15 @@
  ** With React
  */
 const root = document.querySelector('#root');
-const Hello = (props) => {
-    return <p>Hello <b>{props.name}</b></p>;
-};
-const element = (
-    <>
-        <Hello name="World" />
-        <Hello name="Rizki" />
-        <Hello name="Udin" />
-    </>
-);
+const tick = () => {
+    const element = (
+        <>
+            <h1>Hello World</h1>
+            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+        </>
+    );
 
-ReactDOM.render(element, root);
+    ReactDOM.render(element, root);
+};
+
+setInterval(tick, 1000);
