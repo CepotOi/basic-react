@@ -13,8 +13,7 @@ const root = document.querySelector('#root');
 const tick = () => {
     const element = (
         <>
-            <h1>Hello World</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+            <div style={{ width: '10em', height: '10em', backgroundColor: 'red' }}></div>
         </>
     );
 

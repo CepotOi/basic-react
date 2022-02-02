@@ -12,7 +12,13 @@
 const root = document.querySelector('#root');
 
 const tick = () => {
-  const element = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Hello World"), /*#__PURE__*/React.createElement("h2", null, "It is ", new Date().toLocaleTimeString(), "."));
+  const element = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: '10em',
+      height: '10em',
+      backgroundColor: 'red'
+    }
+  }));
   ReactDOM.render(element, root);
 };
 
