@@ -12,12 +12,18 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-    const [login, setLogin] = React.useState(false);
+
+    const headingRef = React.useRef(null);
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            headingRef.current.textContent = 'Judul';
+        }, 1000);
+    });
 
     return (
         <>
-            <h1>{login && 'You are logged in'}</h1>
-            <button onClick={() => setLogin(true)}>Login</button>
+            <h1 ref={headingRef}>Heading</h1>
         </>
     );
 };
