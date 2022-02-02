@@ -11,15 +11,26 @@
  */
 const root = document.querySelector('#root');
 
-const Button = props => {
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      alert(props.text);
+const Button = () => {
+  const [count, setCount] = React.useState(0);
+
+  const decremenet = () => {
+    if (count > -10 && count <= 10) {
+      setCount(count - 1);
     }
-  }, "Click me");
+  };
+
+  const increment = () => {
+    if (count >= -10 && count < 10) {
+      setCount(count + 1);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    onClick: decremenet
+  }, "-"), /*#__PURE__*/React.createElement("span", null, count), /*#__PURE__*/React.createElement("button", {
+    onClick: increment
+  }, "+"));
 };
 
-const element = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-  text: "Hello World"
-}));
-ReactDOM.render(element, root);
+ReactDOM.render( /*#__PURE__*/React.createElement(Button, null), root);
