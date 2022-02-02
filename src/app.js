@@ -10,9 +10,16 @@
  ** With React
  */
 const root = document.querySelector('#root');
+const Button = (props) => {
+    return (
+        <button onClick={() => {
+            alert(props.text);
+        }}>Click me</button>
+    );
+};
 const element = (
     <>
-        <div className='box'></div>
+        <Button text="Hello World" />
     </>
 );
 
