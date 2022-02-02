@@ -12,23 +12,12 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-    const [count, setCount] = React.useState(0);
-    React.useEffect(() => {
-        // init first time for component
-        console.log('Fetch Data');
-
-        return () => {
-            // cleanup
-            console.log('Cleanup');
-        };
-    });
+    const [login, setLogin] = React.useState(false);
 
     return (
         <>
-            <h1>{count}</h1>
-            <button onClick={() => {
-                setCount(count + 1);
-            }}>Increment</button>
+            <h1>{login && 'You are logged in'}</h1>
+            <button onClick={() => setLogin(true)}>Login</button>
         </>
     );
 };

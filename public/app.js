@@ -12,20 +12,10 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-  const [count, setCount] = React.useState(0);
-  React.useEffect(() => {
-    // init first time for component
-    console.log('Fetch Data');
-    return () => {
-      // cleanup
-      console.log('Cleanup');
-    };
-  });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, count), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setCount(count + 1);
-    }
-  }, "Increment"));
+  const [login, setLogin] = React.useState(false);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, login && 'You are logged in'), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setLogin(true)
+  }, "Login"));
 };
 
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), root);
