@@ -10,27 +10,27 @@
  ** With React
  */
 const root = document.querySelector('#root');
-const Button = () => {
-    const [count, setCount] = React.useState(0);
 
-    const decremenet = () => {
-        if (count > -10 && count <= 10) {
-            setCount(count - 1);
-        }
-    };
-    const increment = () => {
-        if (count >= -10 && count < 10) {
-            setCount(count + 1);
-        }
-    };
+const App = () => {
+    const [count, setCount] = React.useState(0);
+    React.useEffect(() => {
+        // init first time for component
+        console.log('Fetch Data');
+
+        return () => {
+            // cleanup
+            console.log('Cleanup');
+        };
+    });
 
     return (
         <>
-            <button onClick={decremenet}>-</button>
-            <span>{count}</span>
-            <button onClick={increment}>+</button>
+            <h1>{count}</h1>
+            <button onClick={() => {
+                setCount(count + 1);
+            }}>Increment</button>
         </>
     );
 };
 
-ReactDOM.render(<Button />, root);
+ReactDOM.render(<App />, root);

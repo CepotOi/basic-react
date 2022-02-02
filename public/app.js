@@ -11,26 +11,21 @@
  */
 const root = document.querySelector('#root');
 
-const Button = () => {
+const App = () => {
   const [count, setCount] = React.useState(0);
-
-  const decremenet = () => {
-    if (count > -10 && count <= 10) {
-      setCount(count - 1);
-    }
-  };
-
-  const increment = () => {
-    if (count >= -10 && count < 10) {
+  React.useEffect(() => {
+    // init first time for component
+    console.log('Fetch Data');
+    return () => {
+      // cleanup
+      console.log('Cleanup');
+    };
+  });
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, count), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
       setCount(count + 1);
     }
-  };
-
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-    onClick: decremenet
-  }, "-"), /*#__PURE__*/React.createElement("span", null, count), /*#__PURE__*/React.createElement("button", {
-    onClick: increment
-  }, "+"));
+  }, "Increment"));
 };
 
-ReactDOM.render( /*#__PURE__*/React.createElement(Button, null), root);
+ReactDOM.render( /*#__PURE__*/React.createElement(App, null), root);
