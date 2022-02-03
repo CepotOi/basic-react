@@ -12,10 +12,34 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-  const fruits = ['apple', 'banana', 'orange', 'pear'];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("ul", null, fruits.map((fruit, index) => /*#__PURE__*/React.createElement("li", {
-    key: index
-  }, fruit))));
+  /**
+   ** Uncontrolled Component
+   */
+  // const nameRef = React.useRef(null);
+
+  /**
+   ** Controlled Component
+  */
+  const [name, setName] = React.useState('');
+
+  const submited = event => {
+    event.preventDefault(); // const name = nameRef.current.value;
+
+    console.log(name);
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("form", {
+    onSubmit: submited
+  }, /*#__PURE__*/React.createElement("label", null, "Name : "), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    placeholder: "Name",
+    name: "name" // ref={nameRef}
+    ,
+    value: name,
+    onChange: event => setName(event.target.value)
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Submit")));
 };
 
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), root);
