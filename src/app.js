@@ -13,37 +13,30 @@ const root = document.querySelector('#root');
 
 const App = () => {
 
-    /**
-     ** Uncontrolled Component
-     */
-    // const nameRef = React.useRef(null);
+    const [blogs, setBlog] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
 
-    /**
-     ** Controlled Component
-    */
-    const [name, setName] = React.useState('');
+    React.useEffect(async () => {
+        const uri = await fetch('https://api.spaceflightnewsapi.net/v3/blogs');
+        const responses = await uri.json();
 
-    const submited = (event) => {
-        event.preventDefault();
-
-        // const name = nameRef.current.value;
-        console.log(name);
-    };
+        setBlog(responses);
+        setLoading(false);
+    }, []);
 
     return (
         <>
-            <form onSubmit={submited}>
-                <label>Name : </label>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    // ref={nameRef}
-                    value={name}
-                    onChange={event => setName(event.target.value)}
-                />
-                <button type="submit">Submit</button>
-            </form>
+            <h1>Feth API</h1>
+
+            {loading && <p>Loading...</p>}
+            <ul>
+                {blogs.map(blog => (
+                    <li key={blog.id}>
+                        <h2>{blog.title}</h2>
+                        <p>{blog.newsSite}</p>
+                    </li>
+                ))}
+            </ul>
         </>
     );
 };
