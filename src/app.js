@@ -13,17 +13,13 @@ const root = document.querySelector('#root');
 
 const App = () => {
 
-    const headingRef = React.useRef(null);
-
-    React.useEffect(() => {
-        setTimeout(() => {
-            headingRef.current.textContent = 'Judul';
-        }, 1000);
-    });
+    const fruits = ['apple', 'banana', 'orange', 'pear'];
 
     return (
         <>
-            <h1 ref={headingRef}>Heading</h1>
+            <ul>
+                {fruits.map((fruit, index) => <li key={index}>{fruit}</li>)}
+            </ul>
         </>
     );
 };

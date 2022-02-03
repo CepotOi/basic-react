@@ -12,15 +12,10 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-  const headingRef = React.useRef(null);
-  React.useEffect(() => {
-    setTimeout(() => {
-      headingRef.current.textContent = 'Judul';
-    }, 1000);
-  });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", {
-    ref: headingRef
-  }, "Heading"));
+  const fruits = ['apple', 'banana', 'orange', 'pear'];
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("ul", null, fruits.map((fruit, index) => /*#__PURE__*/React.createElement("li", {
+    key: index
+  }, fruit))));
 };
 
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), root);
