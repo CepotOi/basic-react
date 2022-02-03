@@ -12,30 +12,65 @@
 const root = document.querySelector('#root');
 
 const App = () => {
+    const [activities, setActivity] = React.useState('');
+    const [editTodos, setEditTodos] = React.useState({});
+    const [todos, setTodo] = React.useState([]);
 
-    const [blogs, setBlog] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
+    const generateId = Date.now();
 
-    React.useEffect(async () => {
-        const uri = await fetch('https://api.spaceflightnewsapi.net/v3/blogs');
-        const responses = await uri.json();
+    const onChangeHandler = (e) => {
+        setActivity(e.target.value);
+    };
 
-        setBlog(responses);
-        setLoading(false);
-    }, []);
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+
+        if (editTodos.id) {
+            const editTodo = {
+                id: editTodos.id,
+                activities,
+            };
+
+            const editTodoIndex = todos.findIndex((todo) => todo.id === editTodos.id);
+            const updatedTodos = [...todos];
+            updatedTodos[editTodoIndex] = editTodo;
+            setTodo(updatedTodos);
+            return setActivity('');
+        }
+
+        setTodo([...todos, {
+            id: generateId,
+            activities,
+        }]);
+        setActivity('');
+    };
+
+    const editTodoHandler = (todo) => {
+        setActivity(todo.activities);
+        setEditTodos(todo);
+    };
+
+    const deleteTodoHandler = (id) => {
+        setTodo(todos.filter(todo => todo.id !== id));
+    };
 
     return (
         <>
-            <h1>Feth API</h1>
-
-            {loading && <p>Loading...</p>}
+            <h1>Simple TODO list</h1>
+            <form onSubmit={onSubmitHandler}>
+                <input type="text" placeholder="todo" name="todo" onChange={onChangeHandler} value={activities} />
+                <button type="submit">{editTodos.id ? 'Save' : 'Create'}</button>
+            </form>
             <ul>
-                {blogs.map(blog => (
-                    <li key={blog.id}>
-                        <h2>{blog.title}</h2>
-                        <p>{blog.newsSite}</p>
-                    </li>
-                ))}
+                {todos.map((todo) => {
+                    return (
+                        <li key={todo.id}>
+                            {todo.activities}
+                            <button onClick={editTodoHandler.bind(this, todo)}>Edit</button>
+                            <button onClick={deleteTodoHandler.bind(this, todo.id)}>Delete</button>
+                        </li>
+                    );
+                })}
             </ul>
         </>
     );
