@@ -12,16 +12,16 @@
 const root = document.querySelector('#root');
 
 const App = () => {
-    const [activities, setActivity] = React.useState('');
+    const [activity, setActivity] = React.useState('');
     const [editTodos, setEditTodos] = React.useState({});
-    const [todos, setTodo] = React.useState([]);
+    const [todos, setTodos] = React.useState([]);
     const [messages, setMessage] = React.useState('');
 
     const generateId = Date.now();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        if (!activities) {
+        if (!activity) {
             return setMessage('Please enter a todo!');
         } else {
             setMessage('');
@@ -30,19 +30,19 @@ const App = () => {
         if (editTodos.id) {
             const editTodo = {
                 ...editTodos,
-                activities,
+                activity,
             };
 
             const editTodoIndex = todos.findIndex((todo) => todo.id === editTodos.id);
             const updatedTodos = [...todos];
             updatedTodos[editTodoIndex] = editTodo;
-            setTodo(updatedTodos);
+            setTodos(updatedTodos);
             return cancelEditHandler();
         }
 
-        setTodo([...todos, {
+        setTodos([...todos, {
             id: generateId,
-            activities,
+            activity,
             completed: false,
         }]);
         setActivity('');
@@ -57,11 +57,11 @@ const App = () => {
         const updatedTodos = [...todos];
         const updatedTodoIndex = updatedTodos.findIndex((currentTodo) => currentTodo.id === todo.id);
         updatedTodos[updatedTodoIndex] = updatedTodo;
-        setTodo(updatedTodos);
+        setTodos(updatedTodos);
     };
 
     const editTodoHandler = (todo) => {
-        setActivity(todo.activities);
+        setActivity(todo.activity);
         setEditTodos(todo);
     };
 
@@ -71,7 +71,7 @@ const App = () => {
     };
 
     const deleteTodoHandler = (id) => {
-        setTodo(todos.filter(todo => todo.id !== id));
+        setTodos(todos.filter(todo => todo.id !== id));
         if (editTodos.id) cancelEditHandler();
     };
 
@@ -85,7 +85,7 @@ const App = () => {
                     placeholder="todo"
                     name="todo"
                     onChange={(e) => setActivity(e.target.value)}
-                    value={activities} />
+                    value={activity} />
                 <button type="submit">{editTodos.id ? 'Save' : 'Create'}</button>
                 {editTodos.id && <button type="button" onClick={cancelEditHandler}>Cancel</button>}
             </form>
@@ -97,7 +97,7 @@ const App = () => {
                         return (
                             <li key={todo.id}>
                                 <input type="checkbox" onChange={completedHandler.bind(this, todo)} checked={todo.completed} />
-                                {todo.completed ? <del>{todo.activities}</del> : todo.activities}
+                                {todo.completed ? <del>{todo.activity}</del> : todo.activity}
                                 <button onClick={editTodoHandler.bind(this, todo)}>Edit</button>
                                 <button onClick={deleteTodoHandler.bind(this, todo.id)}>Delete</button>
                             </li>
